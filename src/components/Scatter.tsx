@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import { thisData } from "../data.js";
 import $ from "jquery";
+import VariableDropdown from "./VariableDropdown";
 
 const Scatter = () => {
   const [formattedData, setFormattedData] = useState<any>([]);
@@ -58,6 +59,10 @@ const Scatter = () => {
     handleSelection(inputData);
   };
 
+  useEffect(() => {
+    parseData();
+  }, [xVar, yVar]);
+
   const parseData = () => {
     var xData: number[] = [];
     var yData: number[] = [];
@@ -74,6 +79,7 @@ const Scatter = () => {
         x: xData,
         y: yData,
         labels: labelsData,
+        text: labelsData,
         type: "scatter",
         mode: "markers",
         marker: { color: "red" },
@@ -82,13 +88,10 @@ const Scatter = () => {
   };
 
   return (
-    <Grid container direction="column">
+    <Grid container direction="column" spacing={1}>
       <Grid item>
         <Typography variant="h3">Cuckoo</Typography>
       </Grid>
-      {/* <Grid item>
-        <Typography variant="h4">{`Selected wall id: ${selectedId}`}</Typography>
-      </Grid> */}
       <Grid item>
         <Plot
           data={formattedData}
@@ -96,6 +99,12 @@ const Scatter = () => {
           onClick={onClick}
           onSelected={onSelected}
         />
+      </Grid>
+      <Grid item>
+        <VariableDropdown axis="x" setVar={setXVar} variable={xVar} />
+      </Grid>
+      <Grid item>
+        <VariableDropdown axis="y" setVar={setYVar} variable={yVar} />
       </Grid>
     </Grid>
   );
