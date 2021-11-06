@@ -92,6 +92,15 @@ const Scatter = () => {
       <Grid item>
         <Typography variant="h3">Cuckoo</Typography>
       </Grid>
+      <Grid item></Grid>
+      <Grid item container spacing={2}>
+        <Grid item>
+          <VariableDropdown axis="x" setVar={setXVar} variable={xVar} />
+        </Grid>
+        <Grid item>
+          <VariableDropdown axis="y" setVar={setYVar} variable={yVar} />
+        </Grid>
+      </Grid>
       <Grid item>
         <Plot
           data={formattedData}
@@ -99,12 +108,6 @@ const Scatter = () => {
           onClick={onClick}
           onSelected={onSelected}
         />
-      </Grid>
-      <Grid item>
-        <VariableDropdown axis="x" setVar={setXVar} variable={xVar} />
-      </Grid>
-      <Grid item>
-        <VariableDropdown axis="y" setVar={setYVar} variable={yVar} />
       </Grid>
     </Grid>
   );
