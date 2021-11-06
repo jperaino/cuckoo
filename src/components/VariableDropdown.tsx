@@ -25,9 +25,7 @@ const VariableDropdown = ({
   const [options, setOptions] = useState<string[]>([]);
 
   useEffect(() => {
-    // console.log(Object.keys(thisData[0]));
     setOptions(Object.keys(thisData[0]).sort());
-    setVar(options[0]);
   }, []);
 
   const handleChange = (e) => {
