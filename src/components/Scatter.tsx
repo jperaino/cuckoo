@@ -4,10 +4,12 @@ import Plot from "react-plotly.js";
 import { thisData } from "../data.js";
 import $ from "jquery";
 import VariableDropdown from "./VariableDropdown";
+import DataTable from "./Table";
 
 const Scatter = () => {
   const [formattedData, setFormattedData] = useState<any>([]);
   const [selectedIds, setSelectedIds] = useState<string[] | number[]>([]);
+  const [selectedData, setSelectedData] = useState<any[]>([]);
 
   const [xVar, setXVar] = useState<string>("Area");
   const [yVar, setYVar] = useState<string>("Volume");
@@ -15,6 +17,17 @@ const Scatter = () => {
   useEffect(() => {
     parseData();
   }, []);
+
+  useEffect(() => {
+    console.log(thisData);
+    var tempSelectedData = [];
+    selectedIds.forEach((id) => {
+      console.log(thisData.find((d) => d.ID === id));
+      tempSelectedData.push(thisData.find((d) => d.ID === id));
+    });
+
+    setSelectedData(tempSelectedData);
+  }, [selectedIds]);
 
   const getIdsFromSelection = (inputData: any): any[] => {
     const { points } = inputData;
@@ -48,6 +61,7 @@ const Scatter = () => {
 
   const handleSelection = (inputData: any) => {
     const ids = getIdsFromSelection(inputData);
+    setSelectedIds(ids);
     sendIdsToFlask(ids);
   };
 
@@ -108,6 +122,9 @@ const Scatter = () => {
           onClick={onClick}
           onSelected={onSelected}
         />
+      </Grid>
+      <Grid item>
+        <DataTable data={selectedData} />
       </Grid>
     </Grid>
   );
