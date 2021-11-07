@@ -46,7 +46,6 @@ const DataTable = ({ data }: DataTableProps) => {
 
   return (
     <Grid item>
-      <Typography>Table</Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
