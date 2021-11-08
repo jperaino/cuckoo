@@ -1,6 +1,7 @@
 # Cuckoo
 
-Anomoly detection for Revit
+Anomoly detection for Revit. See slide deck here:
+https://github.com/jperaino/cuckoo/blob/main/Presentation.pdf
 
 ## Quickstart
 
